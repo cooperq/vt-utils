@@ -1,3 +1,4 @@
 urlextract
 requests
 flask
+flask_sqlalchemy
