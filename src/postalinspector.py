@@ -5,13 +5,12 @@ Author: Cooper Quintin <cooperq@eff.org>
 License: GPLv3
 """
 import base64
+import datetime
 import email
 import hashlib
 import json
 import os
 import sys
-import datetime
-
 
 import requests
 from urlextract import URLExtract
@@ -64,7 +63,7 @@ def parse_eml(eml):
         artifact = Artifact.query.filter_by(handle = shasum).first()
         if(artifact):
             print(f"{shasum} already exists in DB")
-            responses.append(artifact.response)
+            responses.append(json.loads(artifact.response))
         else:
             params = {'apikey': vtapi, 'resource': shasum}
             headers = {
@@ -84,7 +83,7 @@ def parse_eml(eml):
         artifact = Artifact.query.filter_by(handle = url).first()
         if(artifact):
             print(f"{url} already exists in DB")
-            responses.append(artifact.response)
+            responses.append(json.loads(artifact.response))
         else:
 
             headers = {
